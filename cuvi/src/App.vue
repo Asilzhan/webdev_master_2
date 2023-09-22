@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import FirstComponent from "@/components/FirstComponent.vue";
+import { RouterView } from "vue-router";
+import Toast from "primevue/toast";
+
 </script>
 
 <template>
   <router-view />
-  <FirstComponent />
+  <Toast />
 </template>
