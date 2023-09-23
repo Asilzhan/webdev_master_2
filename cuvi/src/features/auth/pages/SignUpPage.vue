@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-// import { RouterLink } from "vue-router";
 const login = ref<string | null>(null);
 const password = ref<string | null>(null);
-const rememberMe = ref<boolean>(false);
+const passwordCheck = ref<string | null>(null);
 </script>
 
 <template>
@@ -17,23 +16,17 @@ const rememberMe = ref<boolean>(false);
         </div>
       </div>
 
-      <div class="text-black/60 font-medium">
-        <label for="email" class="block mb-2">Логин</label>
+      <div>
+        <label for="email" class="block text-black/60 font-medium mb-2">Логин</label>
         <InputText id="email" type="text" class="w-full mb-3 text-lg" v-model="login" />
 
-        <label for="password" class="block mb-2">Пароль</label>
+        <label for="password" class="block text-black/60 font-medium mb-2">Пароль</label>
         <InputText id="password" type="password" class="w-full mb-3 text-lg" v-model="password" @keypress.enter="" />
 
-        <div class="flex mt-2">
-          <Checkbox binary v-model="rememberMe" inputId="rememberMe" name="rememberMe" />
-          <label for="rememberMe" class="ml-2"> Запомнить </label>
-        </div>
+        <label for="password" class="block text-black/60 font-medium mb-2">Повторите пароль</label>
+        <InputText id="password" type="password" class="w-full mb-3 text-lg" v-model="passwordCheck" @keypress.enter="" />
 
-        <router-link :to="{ name: 'StudentMainPage' }">
-          <template v-slot:default="{ navigate }">
-            <Button label="Войти" icon="pi pi-user" class="w-full mt-10 h-12 border-0 focus:shadow-none text-lg" @click="navigate()" />
-          </template>
-        </router-link>
+        <Button label="Войти" icon="pi pi-user" class="w-full mt-10 h-12 border-0 focus:shadow-none text-lg" @click="" />
       </div>
     </div>
     <div class="flex-1" />

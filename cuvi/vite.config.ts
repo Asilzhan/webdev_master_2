@@ -24,7 +24,7 @@ export default defineConfig({
           enabledCollections: ["ph"],
         }),
       ],
-      dirs: ["./src/**", "./src/features/**", "./src/layouts/**"],
+      dirs: ["./src/**", "./src/features/**/*"],
     }),
   ],
   resolve: {
@@ -33,3 +33,4 @@ export default defineConfig({
     },
   },
 });
+
