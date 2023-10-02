@@ -20,8 +20,8 @@ declare module 'vue' {
     IPhUser: typeof import('~icons/ph/user')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SignInPage: typeof import('./src/features/auth/pages/SignInPage.vue')['default']
-    SignUpPage: typeof import('./src/features/auth/pages/SignUpPage.vue')['default']
+    SignInPage: typeof import('./src/features/account/pages/SignInPage.vue')['default']
+    SignUpPage: typeof import('./src/features/account/pages/SignUpPage.vue')['default']
     StudentMainPage: typeof import('./src/features/student/pages/StudentMainPage.vue')['default']
     StudentSchedulePage: typeof import('./src/features/student/pages/StudentSchedulePage.vue')['default']
   }

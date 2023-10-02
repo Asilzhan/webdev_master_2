@@ -5,16 +5,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Cuvi.WebApi/Cuvi.WebApi.csproj", "Cuvi.WebApi/"]
-RUN dotnet restore "Cuvi.WebApi/Cuvi.WebApi.csproj"
+COPY ["Cuvi/Cuvi.csproj", "Cuvi/"]
+RUN dotnet restore "Cuvi/Cuvi.csproj"
 COPY . .
-WORKDIR "/src/Cuvi.WebApi"
-RUN dotnet build "Cuvi.WebApi.csproj" -c Release -o /app/build
+WORKDIR "/src/Cuvi"
+RUN dotnet build "Cuvi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Cuvi.WebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Cuvi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Cuvi.WebApi.dll"]
+ENTRYPOINT ["dotnet", "Cuvi.dll"]
