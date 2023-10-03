@@ -4,7 +4,8 @@ type Schedule = {
 };
 
 type TimeSlot = {
-  time: [number, number];
+  timeStart: string; // Hour as a number (0-23)
+  timeEnd: string; // Hour as a number (0-23)
   isBooked: boolean;
   bookName: string;
   teacherName: string;
@@ -12,21 +13,22 @@ type TimeSlot = {
 
 export type { Schedule, TimeSlot };
 
-export const scheduleMock: Schedule = {
-  date: new Date(),
+export const mockSchedule: Schedule = {
+  date: new Date("2023-10-03"),
   timeSlots: [
     {
-      time: [8, 11],
-      isBooked: false,
-      bookName: "",
-      teacherName: "",
+      timeStart: "9:00",
+      timeEnd: "10:00",
+      isBooked: true,
+      bookName: "John Doe",
+      teacherName: "Mr. Smith",
     },
     {
-      time: [14, 17],
-      isBooked: false,
-      bookName: "",
-      teacherName: "",
+      timeStart: "11:00",
+      timeEnd: "12:00",
+      isBooked: true,
+      bookName: "Jane Doe",
+      teacherName: "Mrs. Johnson",
     },
   ],
-} as Schedule;
-
+};

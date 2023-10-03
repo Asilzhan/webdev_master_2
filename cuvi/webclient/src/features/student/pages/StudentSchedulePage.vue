@@ -1,10 +1,7 @@
 <script setup lang="ts"></script>
-<template>
-  <default-layout>
-    <template v-slot:navigation>
-      <router-link link text :outlined="false" :to="{ name: 'StudentSchedulePage' }">edfvgdsfds</router-link>
-    </template>
-    <day-schedule title="Понедельник" />
-  </default-layout>
-</template>
 
+<template>
+  <basic-card class="mt-3">
+    <week-schedule :showFullDay="true" title="ааа"> </week-schedule>
+  </basic-card>
+</template>

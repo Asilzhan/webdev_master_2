@@ -8,21 +8,22 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     App: typeof import('./src/App.vue')['default']
+    BasicCard: typeof import('./src/components/BasicCard.vue')['default']
+    BasicHeader: typeof import('./src/layout/BasicHeader.vue')['default']
     Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
-    copy: typeof import('./src/features/student/pages/StudentMainPage copy.vue')['default']
     DaySchedule: typeof import('./src/features/schedule/components/DaySchedule.vue')['default']
-    DefaultLayout: typeof import('./src/features/student/layouts/DefaultLayout.vue')['default']
     FirstComponent: typeof import('./src/components/FirstComponent.vue')['default']
     HomePage: typeof import('./src/pages/HomePage.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     IPhAirplaneTakeoffBold: typeof import('~icons/ph/airplane-takeoff-bold')['default']
-    IPhUser: typeof import('~icons/ph/user')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignInPage: typeof import('./src/features/account/pages/SignInPage.vue')['default']
     SignUpPage: typeof import('./src/features/account/pages/SignUpPage.vue')['default']
     StudentMainPage: typeof import('./src/features/student/pages/StudentMainPage.vue')['default']
     StudentSchedulePage: typeof import('./src/features/student/pages/StudentSchedulePage.vue')['default']
+    ThreeColumnLayout: typeof import('./src/layout/ThreeColumnLayout.vue')['default']
+    WeekSchedule: typeof import('./src/features/schedule/components/WeekSchedule.vue')['default']
   }
 }
