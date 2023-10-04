@@ -4,21 +4,21 @@ import type { Schedule, TimeSlot } from "../types/Schedule";
 
 const props = withDefaults(
   defineProps<{
-    title: String;
     schedule?: Schedule[];
-    showFullDay?: boolean;
-    rowHeight?: number;
   }>(),
-  { schedule: () => [], showFullDay: false, rowHeight: 40 }
+  { schedule: () => [] }
 );
 
 const emit = defineEmits<{
   click: [timeSlot: TimeSlot];
+  "previous-week": [];
+  "next-week": [];
 }>();
 
 const rowsCount = 10;
+const rowHeight = 40;
 const timeLabelWidth = "55px";
-const rowHeightInPx = computed(() => props.rowHeight + "px");
+const rowHeightInPx = computed(() => rowHeight + "px");
 
 function getDurationInMinutes(startTime: string, endTime: string) {
   const [hStart, mStart] = startTime.split(":").map((n) => parseInt(n));
@@ -27,7 +27,7 @@ function getDurationInMinutes(startTime: string, endTime: string) {
 }
 
 function minutesToPx(minutes: number) {
-  return (props.rowHeight / 30) * minutes;
+  return (rowHeight / 30) * minutes;
 }
 
 const bgColors = [
@@ -59,96 +59,66 @@ function getColors() {
   return { "background-color": bgColor, "border-left-color": borderColor };
 }
 
-const mockSchedule = [
-  {
-    date: new Date(2023, 11, 2),
-    timeSlots: [
-      {
-        bookName: "Abs Circuit 1",
-        isBooked: true,
-        teacherName: "Zhanseit Assylzhan",
-        timeStart: "09:30",
-        timeEnd: "10:30",
-      },
-      {
-        bookName: "Abs Circuit 2",
-        isBooked: true,
-        teacherName: "Zhanseit Assylzhan",
-        timeStart: "11:00",
-        timeEnd: "12:30",
-      },
-      {
-        bookName: "Abs Circuit 3",
-        isBooked: true,
-        teacherName: "Zhanseit Assylzhan",
-        timeStart: "12:30",
-        timeEnd: "13:30",
-      },
-    ],
-  },
-  {
-    date: new Date(2023, 11, 3),
-  },
-  {
-    date: new Date(2023, 11, 4),
-
-    timeSlots: [
-      {
-        bookName: "Abs Circuit 2",
-        isBooked: true,
-        teacherName: "Zhanseit Assylzhan",
-        timeStart: "14:10",
-        timeEnd: "17:10",
-      },
-    ],
-  },
-  {
-    date: new Date(2023, 11, 5),
-  },
-] as Schedule[];
-
 const selectedDay = ref(0);
 </script>
 
 <template>
-  <div class="schedule">
-    <div class="schedule__controls">
-      <Button v-for="(weekDay, i) in mockSchedule" :key="i" :class="['schedule__control', { 'bg-indigo': selectedDay === i }]" @click="selectedDay = i">
-        {{ weekDay.date.toLocaleDateString("ru-KZ", { weekday: "short", day: "numeric", month: "short" }) }}
-      </Button>
+  <div class="flex flex-row h-full">
+    <div class="schedule__control_buttons group" @click="emit('next-week')">
+      <i-ph-arrow-left class="schedule__control_button_icon" />
     </div>
-    <div class="schedule__grid">
-      <template v-for="i in rowsCount" :key="i">
-        <div class="schedule__grid-row">
-          <span class="schedule__grid-row-label">{{ `${i + 8}:00` }}</span>
-        </div>
-        <div class="schedule__grid-row"></div>
-      </template>
+    <div class="schedule flex-grow">
+      <div class="schedule__controls">
+        <Button v-for="(weekDay, i) in schedule" :key="i" :class="['schedule__control', { 'bg-indigo': selectedDay === i }]" @click="selectedDay = i">
+          {{ weekDay.date.toLocaleDateString("ru-KZ", { weekday: "short", day: "numeric", month: "short" }) }}
+        </Button>
+      </div>
+      <div class="schedule__grid">
+        <template v-for="i in rowsCount" :key="i">
+          <div class="schedule__grid-row">
+            <span class="schedule__grid-row-label">{{ `${i + 8}:00` }}</span>
+          </div>
+          <div class="schedule__grid-row"></div>
+        </template>
+      </div>
+      <div class="schedule__days">
+        <section :class="['schedule__day', { 'schedule__day-hidden': selectedDay !== i }]" v-for="(weekDay, i) in schedule" :key="i">
+          <div class="schedule__col-label">{{ weekDay.date.toLocaleDateString("ru-KZ", { weekday: "short", day: "numeric", month: "short" }) }}</div>
+          <ul class="schedule__events relative">
+            <li class="schedule__event-wrapper" v-for="(e, j) in weekDay.timeSlots" :key="j">
+              <div
+                @click="emit('click', e)"
+                class="schedule__event"
+                :style="{
+                  ...getColors(),
+                  '--schedule-event-top': minutesToPx(getDurationInMinutes('9:00', e.timeStart)) + 'px',
+                  '--schedule-event-height': minutesToPx(getDurationInMinutes(e.timeStart, e.timeEnd)) + 'px',
+                }">
+                <div class="text-base font-medium">{{ e.bookName }}</div>
+                <time class="text-sm">{{ `${e.timeStart} - ${e.timeEnd}` }}</time>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
-    <div class="schedule__days">
-      <section :class="['schedule__day', { 'schedule__day-hidden': selectedDay !== i }]" v-for="(weekDay, i) in mockSchedule" :key="i">
-        <div class="schedule__col-label">{{ weekDay.date.toLocaleDateString("ru-KZ", { weekday: "short", day: "numeric", month: "short" }) }}</div>
-        <ul class="schedule__events relative">
-          <li class="schedule__event-wrapper" v-for="(e, j) in weekDay.timeSlots" :key="j">
-            <div
-              @click="emit('click', e)"
-              class="schedule__event"
-              :style="{
-                ...getColors(),
-                '--schedule-event-top': minutesToPx(getDurationInMinutes('9:00', e.timeStart)) + 'px',
-                '--schedule-event-height': minutesToPx(getDurationInMinutes(e.timeStart, e.timeEnd)) + 'px',
-              }">
-              <div class="text-base font-medium">{{ e.bookName }}</div>
-              <time class="text-sm">{{ `${e.timeStart} - ${e.timeEnd}` }}</time>
-            </div>
-          </li>
-        </ul>
-      </section>
+    <div class="schedule__control_buttons group" @click="emit('next-week')">
+      <i-ph-arrow-right class="schedule__control_button_icon" />
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.schedule__control_buttons {
+  @apply display-none w-10 flex-col items-center cursor-pointer justify-center text-indigo/80 group hover:bg-indigo/10 transition select-none;
+
+  @media (min-width: 64rem) {
+    @apply flex;
+  }
+}
+.schedule__control_button_icon {
+  @apply opacity-0 group-hover:opacity-100 transition;
+}
 .schedule {
   @apply h-max;
   position: relative;

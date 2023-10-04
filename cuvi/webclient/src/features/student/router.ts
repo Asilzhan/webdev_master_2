@@ -2,12 +2,18 @@ const routes = [
   {
     name: "StudentMainPage",
     path: "/student/home",
-    component: () => import("@/features/student/pages/StudentMainPage.vue"),
+    components: {
+      default: () => import("@/features/student/pages/StudentMainPage.vue"),
+      left: () => import("@/features/navigation/components/LeftMenu.vue"),
+    }
   },
   {
     name: "StudentSchedulePage",
     path: "/student/schedule",
-    component: () => import("@/features/student/pages/StudentSchedulePage.vue"),
+    components: {
+      default: () => import("@/features/student/pages/StudentSchedulePage.vue"),
+      left: () => import("@/features/navigation/components/LeftMenu.vue"),
+    },
   },
 ];
 

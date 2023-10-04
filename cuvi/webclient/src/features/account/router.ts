@@ -16,7 +16,10 @@ const routes = [
   {
     name: "StudentAccountPage",
     path: "/student/account",
-    component: () => import("@/features/account/pages/StudentAccountPage.vue"),
+    components: {
+      default: () => import("@/features/account/pages/StudentAccountPage.vue"),
+      left: () => import("@/features/navigation/components/LeftMenu.vue"),
+    },
   },
 ] as RouteRecordRaw[];
 

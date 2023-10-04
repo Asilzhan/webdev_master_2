@@ -15,8 +15,9 @@ import "virtual:uno.css";
 const app = createApp(App);
 
 app.use(PrimeVue, { unstyled: true, pt: Tailwind });
-app.use(router);
 app.use(ToastService);
+
+app.use(router);
 
 const pinia = createPinia();
 app.use(pinia);
