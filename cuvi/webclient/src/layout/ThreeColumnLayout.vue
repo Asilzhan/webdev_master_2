@@ -3,7 +3,7 @@ import BasicHeader from "./BasicHeader.vue";
 </script>
 
 <template>
-  <div class="grid grid-cols-6 bg-slate/10 h-screen w-screen" >
+  <div class="grid grid-cols-6 bg-slate/10 h-screen w-screen grid-rows-[auto_1fr] gap-y-4" >
     <BasicHeader class="col-span-6" />
     <!-- Left Hamburger and Sidebar -->
     <div class="col-span-0 md:col-span-1">

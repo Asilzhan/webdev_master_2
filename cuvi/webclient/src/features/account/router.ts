@@ -13,6 +13,11 @@ const routes = [
     component: () => import("@/features/account/pages/SignUpPage.vue"),
     meta: { layout: "basic" },
   },
+  {
+    name: "StudentAccountPage",
+    path: "/student/account",
+    component: () => import("@/features/account/pages/StudentAccountPage.vue"),
+  },
 ] as RouteRecordRaw[];
 
 export default routes;
