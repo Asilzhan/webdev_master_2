@@ -1,17 +1,12 @@
-export type Student = {
-  name: string;
+import { User } from "./User";
 
-  login: string;
-  identityNumber?: string;
-  email?: string;
-  internalEmail?: string;
-  phone?: string;
-
-  birthDate?: Date;
+export type Student = User & {
   faculty?: string;
   familyStatus?: string;
   nationality?: string;
   citizenship?: Citizenship;
+
+  type: "STUDENT";
 };
 
 export type Citizenship = {

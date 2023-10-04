@@ -18,6 +18,7 @@ declare module 'vue' {
     Image: typeof import('primevue/image')['default']
     InputText: typeof import('primevue/inputtext')['default']
     IPhAirplaneTakeoffBold: typeof import('~icons/ph/airplane-takeoff-bold')['default']
+    LeftMenu: typeof import('./src/features/navigation/components/LeftMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignInPage: typeof import('./src/features/account/pages/SignInPage.vue')['default']
