@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import type { Schedule, TimeSlot } from "../types/Schedule";
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     schedule?: Schedule[];
   }>(),
