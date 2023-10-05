@@ -2,13 +2,13 @@ import { RouteRecordRaw } from "vue-router";
 
 const routes = [
   {
-    name: "SignIn",
+    name: "SignInPage",
     path: "/sign-in",
     component: () => import("@/features/account/pages/SignInPage.vue"),
     meta: { layout: "basic" },
   },
   {
-    name: "SignUp",
+    name: "SignUpPage",
     path: "/sign-up",
     component: () => import("@/features/account/pages/SignUpPage.vue"),
     meta: { layout: "basic" },

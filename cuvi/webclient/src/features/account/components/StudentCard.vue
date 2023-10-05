@@ -6,16 +6,15 @@ defineProps<{
   student: Student;
 }>();
 
-const [showDetails, toggleShowDetails]  = useToggle(false);
+const [showDetails, toggleShowDetails] = useToggle(false);
 </script>
 
 <template>
   <basic-card class="px-8 py-6 h-fit">
     <div class="w-full flex flex-col">
-      <h1 class="text-2xl font-medium pb-4">{{ student.lastName }} {{ student.firstName }} {{ student.maidenName }}</h1>
+      <h1 class="text-2xl font-medium pb-4">{{ student.firstName }} {{ student.lastName }} {{ student.maidenName }}</h1>
       <hr class="mb-4" />
       <div class="grid grid-cols-[140px_1fr] items-center gap-4 ml-4 transition-all duration-300 ease-in-out overflow-hidden">
-
         <label class="font-bold text-dark">Логин:</label>
         <span class="text-dark">{{ student.username }}</span>
 

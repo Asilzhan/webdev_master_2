@@ -1,14 +1,14 @@
 
 // // Cabinet Types
-// type Cabinet = {
-//   id: string;
-//   name: string;
-//   description?: string;
-//   members: User[];
-//   chats: Chat[];
-//   files: Attachment[];
-//   assignments: Assignment[];
-// };
+export type Cabinet = {
+  id: string;
+  name: string;
+  description?: string;
+  // members: User[];
+  // chats: Chat[];
+  // files: Attachment[];
+  // assignments: Assignment[];
+};
 
 // // Chat Types
 // type Chat = {

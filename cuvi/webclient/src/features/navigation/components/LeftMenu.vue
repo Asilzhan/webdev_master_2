@@ -8,10 +8,12 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col gap-y-4 bg-white rounded-xl overflow-clip drop-shadow-sm">
-    <ul class="my-2">
+    <ul class="my-2 font-mono">
       <router-link :to="{ name: 'StudentMainPage' }" class="link" active-class="bg-gray-300"> Главная </router-link>
       
       <router-link :to="{ name: 'StudentSchedulePage' }" class="link" active-class="bg-gray-300"> Расписание </router-link>
+      
+      <router-link :to="{ name: 'CabinetsPage' }" class="link" active-class="bg-gray-300"> Кабинеты </router-link>
     </ul>
   </div>
 </template>

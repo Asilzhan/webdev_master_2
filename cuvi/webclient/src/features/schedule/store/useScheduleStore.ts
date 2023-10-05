@@ -1,8 +1,9 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import { Schedule } from "../types/Schedule";
 
 export const useScheduleStore = defineStore("schedule-store", () => {
-  const schedule = ref([]);
+  const schedule = ref<Schedule[]>([]);
 
   async function fetchSchedule() {
     const mockSchedule = [
@@ -57,6 +58,7 @@ export const useScheduleStore = defineStore("schedule-store", () => {
   }
 
   function getScheduleForWeek(weekNumber: number) {
+    console.log(weekNumber);
     return schedule.value;
   }
 
