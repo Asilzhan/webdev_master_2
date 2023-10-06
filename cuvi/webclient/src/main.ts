@@ -3,9 +3,11 @@ import "@/assets/css/style.scss";
 import App from "./App.vue";
 import PrimeVue from "primevue/config";
 import Tailwind from "primevue/passthrough/tailwind";
-import router from "@/router";
+import { createRouter } from "@/router";
 import ToastService from "primevue/toastservice";
 import { createPinia } from "pinia";
+import { createAuth0 } from "@auth0/auth0-vue";
+import authConfig from "../auth_config.json";
 
 import "@unocss/reset/sanitize/sanitize.css";
 import "@unocss/reset/sanitize/assets.css";
@@ -17,9 +19,20 @@ const app = createApp(App);
 app.use(PrimeVue, { unstyled: true, pt: Tailwind });
 app.use(ToastService);
 
-app.use(router);
+app.use(createRouter(app));
 
 const pinia = createPinia();
 app.use(pinia);
 
+app.use(
+  createAuth0({
+    domain: authConfig.domain,
+    clientId: authConfig.clientId,
+    authorizationParams: {
+      redirect_uri: window.location.origin,
+    },
+  })
+);
+
 app.mount("#app");
+

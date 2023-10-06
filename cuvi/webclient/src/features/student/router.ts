@@ -5,7 +5,15 @@ const routes = [
     components: {
       default: () => import("@/features/student/pages/StudentMainPage.vue"),
       left: () => import("@/features/navigation/components/LeftMenu.vue"),
-    }
+    },
+  },
+  {
+    name: "StudentMainPage",
+    path: "/",
+    components: {
+      default: () => import("@/features/student/pages/StudentMainPage.vue"),
+      left: () => import("@/features/navigation/components/LeftMenu.vue"),
+    },
   },
   {
     name: "StudentSchedulePage",
@@ -18,3 +26,4 @@ const routes = [
 ];
 
 export default routes;
+

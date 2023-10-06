@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import useAuth from "@/features/account/composables/useAuth";
 import { useAccountStore } from "@/features/account/store/useAccountStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
@@ -34,6 +35,8 @@ function profileClick() {
 
 const accountStore = useAccountStore();
 const { currentUser, currentUserNameShort } = storeToRefs(accountStore);
+
+const { logout } = useAuth();
 </script>
 
 <template>
@@ -53,7 +56,7 @@ const { currentUser, currentUserNameShort } = storeToRefs(accountStore);
   <Menu :model="items" ref="menu" id="overlay_menu" popup>
     <template #start>
       <button @click="profileClick()" class="w-full flex items-center p-2 pl-3 hover:bg-gray-200">
-        <Avatar :image="currentUser.image" class="mr-2 overflow-clip" shape="circle" />
+        <Avatar :image="currentUser?.picture" class="mr-2 overflow-clip" shape="circle" />
         <div class="flex flex-col items-start">
           <span class="font-bold">{{ currentUserNameShort }}</span>
           <span class="text-sm">Студент</span>
@@ -68,12 +71,11 @@ const { currentUser, currentUserNameShort } = storeToRefs(accountStore);
       </a>
     </template>
     <template #end>
-      <router-link v-slot="{ navigate }" :to="{ name: 'SignInPage' }" custom> 
-        <button class="w-full flex items-center p-2 pl-4 hover:bg-gray-200" @click="navigate()">
+      <button class="w-full flex items-center p-2 pl-4 hover:bg-gray-200" @click="logout()">
           <i-ph-sign-out class="pi pi-sign-out" />
           <span class="ml-2">Выйти</span>
         </button>
-      </router-link>
     </template>
   </Menu>
 </template>
+

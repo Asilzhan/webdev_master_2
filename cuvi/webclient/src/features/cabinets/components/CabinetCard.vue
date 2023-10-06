@@ -16,8 +16,8 @@ const cabinetAbbr = computed(() => {
 </script>
 
 <template>
-  <basic-card class="cursor-pointer hover:bg-gray-200">
-    <div class="flex flex-col items-center md:min-w-[240px]">
+  <basic-card class="cursor-pointer hover:bg-gray-200 md:min-w-[240px]">
+    <div class="flex flex-col items-center">
       <div class="w-[60px] h-[60px] bg-rose flex items-center justify-center rounded-sm font-mono">
         <span class="text-white font-semibold select-none">
           {{ cabinetAbbr }}
@@ -27,3 +27,4 @@ const cabinetAbbr = computed(() => {
     </div>
   </basic-card>
 </template>
+

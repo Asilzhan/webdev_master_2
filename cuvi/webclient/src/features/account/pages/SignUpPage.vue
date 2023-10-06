@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { register } from "../api/register";
+
 const login = ref<string | null>(null);
 const password = ref<string | null>(null);
 const passwordCheck = ref<string | null>(null);
+
+async function registerAndRedirect() {
+  await register(login.value ?? "", password.value ?? "");
+}
 </script>
 
 <template>
@@ -24,9 +30,9 @@ const passwordCheck = ref<string | null>(null);
         <InputText id="password" type="password" class="w-full mb-3 text-lg" v-model="password" @keypress.enter="" />
 
         <label for="password" class="block text-black/60 font-medium mb-2">Повторите пароль</label>
-        <InputText id="password" type="password" class="w-full mb-3 text-lg" v-model="passwordCheck" @keypress.enter="" />
+        <InputText id="password2" type="password" class="w-full mb-3 text-lg" v-model="passwordCheck" @keypress.enter="" />
 
-        <Button label="Войти" icon="pi pi-user" class="w-full mt-10 h-12 border-0 focus:shadow-none text-lg" @click="" />
+        <Button label="Войти" icon="pi pi-user" class="w-full mt-10 h-12 border-0 focus:shadow-none text-lg" @click="registerAndRedirect" />
       </div>
     </div>
     <div class="flex-1" />

@@ -10,7 +10,7 @@ const { currentUser, currentUserNameFull } = storeToRefs(accountStore);
 <template>
   <div class="grid grid-cols-[auto_1fr] gap-x-4">
     <div class="w-[240px] max-h-[320px]">
-      <Image :src="currentUser.image" :alt="currentUserNameFull" preview v-if="currentUser.image" class="rounded-xl overflow-clip"></Image>
+      <Image :src="currentUser?.picture" :alt="currentUserNameFull" preview v-if="currentUser?.picture" class="rounded-xl overflow-clip"></Image>
     </div>
     <StudentCard :student="(currentUser as Student)" />
   </div>

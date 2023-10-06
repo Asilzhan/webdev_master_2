@@ -2,8 +2,7 @@
 import { RouterView, useRoute, useRouter } from "vue-router";
 import Toast from "primevue/toast";
 import ThreeColumnLayout from "@/layout/ThreeColumnLayout.vue";
-import { onMounted, shallowRef } from "vue";
-import { useAccountStore } from "@/features/account/store/useAccountStore";
+import { shallowRef } from "vue";
 
 const layoutComponent: any = shallowRef(null);
 const route = useRoute();
@@ -13,9 +12,6 @@ router.afterEach(() => {
   if (route.meta?.layout === "basic") layoutComponent.value = RouterView;
   else layoutComponent.value = ThreeColumnLayout;
 });
-
-const accountStore = useAccountStore();
-onMounted(accountStore.fetchUser);
 </script>
 
 <template>

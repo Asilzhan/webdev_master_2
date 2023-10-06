@@ -1,7 +1,7 @@
 import ky from "ky";
 import { handleDate } from "./datetime";
 
-const api = ky.create({ prefixUrl: import.meta.env.VITE_API_URL });
+const api = ky.create({ prefixUrl: import.meta.env.VITE_API_URL + "/v1" });
 
 export default api;
 

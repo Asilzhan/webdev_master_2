@@ -1,22 +1,19 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { fakeApi } from "@/module/api";
-import type { User, Student } from "../types";
 import { Cabinet } from "@/features/cabinets/types";
 import { computed } from "vue";
-
+import useAuth from "../composables/useAuth";
+// import type { User } from "@auth0/auth0-vue";
 export const useAccountStore = defineStore("account", () => {
-  const currentUser = ref<User | Student>({} as User);
-  const currentUserNameShort = computed(() => `${currentUser.value.firstName} ${currentUser.value.lastName}`);
-  const currentUserNameFull = computed(() => `${currentUser.value.firstName} ${currentUser.value.lastName} ${currentUser.value.maidenName}`);
+  const auth = useAuth();
+  console.log("auth:", auth);
 
-  async function fetchUser() {
-    const { users: randomUsers } = await fakeApi.get("users").json<{ users: User[] }>();
-    currentUser.value = randomUsers[Math.floor(Math.random() * randomUsers.length)];
-    console.log(currentUser.value.birthDate);
-  }
+  // const currentUser = computed<User>(() => user ?? {});
+  const currentUserNameShort = computed(() => `${auth.user?.value?.nickname}`);
+  const currentUserNameFull = computed(() => `${auth.user?.value?.name} ${auth.user?.value?.given_name} ${auth.user?.value?.middle_name}`);
 
   const cabinets = ref<Cabinet[]>([]);
 
-  return { currentUser, currentUserNameShort, currentUserNameFull, fetchUser, cabinets };
+  return { currentUser: auth.user, currentUserNameShort, currentUserNameFull, cabinets };
 });
+
