@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { login } from "../api/login";
-import { useRouter } from "vue-router";
+// import { login } from "../api/login";
+// import { useRouter } from "vue-router";
+import useAuth from "../composables/useAuth";
 // import { RouterLink } from "vue-router";
 const email = ref<string | null>(null);
 const password = ref<string | null>(null);
 // const rememberMe = ref<boolean>(false);
 
-const router = useRouter();
+const { login } = useAuth();
+
+// const router = useRouter();
 async function loginAndRedirect() {
-  if (await login(email.value ?? "", password.value ?? "")) router.push({ name: "StudentMainPage" });
+  login();
+  // if (await login(email.value ?? "", password.value ?? "")) router.push({ name: "StudentMainPage" });
 }
 </script>
 
@@ -48,4 +52,3 @@ async function loginAndRedirect() {
     <div class="flex-1" />
   </div>
 </template>
-
