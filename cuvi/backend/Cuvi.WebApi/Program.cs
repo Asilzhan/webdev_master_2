@@ -1,6 +1,7 @@
+using Cuvi.WebApi.ApiEndpoints;
+using Cuvi.WebApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -66,19 +67,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapIdentityApi<MyUser>();
+app.MapCabinetsEndpoints();
 
 app.MapGet("/hello", (HttpContext context) => $"Hello!, {context.User.Identity?.Name}!").RequireAuthorization();
 
 app.Run();
-
-public class MyUser : IdentityUser
-{
-    public DateTime BithDate { get; set; }
-}
-
-public class AppDbContext : IdentityDbContext<MyUser>
-{
-    // public AppDbContext() { }
-    public AppDbContext(DbContextOptions<AppDbContext> options): base(options) { }
-    // public DbSet<MyUser> Users { get; set; }
-}
