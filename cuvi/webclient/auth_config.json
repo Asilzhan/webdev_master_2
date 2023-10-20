@@ -1,5 +1,7 @@
 {
   "domain": "cuvi.eu.auth0.com",
   "clientId": "r3u9rFVXE4rYyKAhbvQ1aaDprPfSUbi6",
-  "audience": "https://cuvi/api/v1"
+  "authorizationParams": {
+    "audience": "https://cuvi/api/v1"
+  }
 }

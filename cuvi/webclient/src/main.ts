@@ -30,6 +30,7 @@ app.use(
     clientId: authConfig.clientId,
     authorizationParams: {
       redirect_uri: window.location.origin,
+      audience: authConfig.authorizationParams.audience,
     },
   })
 );
